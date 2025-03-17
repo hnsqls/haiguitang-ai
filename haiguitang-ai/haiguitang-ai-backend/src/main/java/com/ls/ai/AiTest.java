@@ -1,81 +1,3 @@
-# AI 海龟汤
-
-利用AI 生产海龟汤故事，和用户交互式的响应，让用户去解密。
-
-海龟汤游戏介绍 [海龟汤概论 - 知乎](https://zhuanlan.zhihu.com/p/37072206)
-
-利用AI 当作主持人，给出”汤面“，让用户去猜情景。AI 只能回复用户 `是 或者 不是`，10次提问后就给出“汤底”。
-
-# 需求分析
-
-* AI 生产“汤面和汤底” P0
-* 用户和AI交互    P0
-* 查看往期对话  P1
-* 用户可以分享本次的海龟汤  P2
-
-# 原型图
-
-![image-20250317092733543](images/开发手册.assets/image-20250317092733543.png)
-
-![image-20250317093300564](images/开发手册.assets/image-20250317093300564.png)
-
-# 技术
-
-* SpringBoot
-* Mysql
-* Mybatis
-* DeepSeek
-* Vue
-
-# 核心功能梳理
-
-1. 利用AI (主持人)生成海龟汤-> 输出给用户
-2. 用户根据“汤面” ----> 询问问题或者给出答案
-3. AI (主持人)对于用户的问题只能回答 是或者不是
-4. 10条询问后还没有用户还没有猜出“汤底”，AI (主持人)给出“汤底”，并结束游戏
-5. 或者用户猜出了答案，AI (主持人) 提示猜对了，并且给出“汤底”
-6. 或者用户说出不想玩了，AI (主持人) 并且给出“汤底，并结束游戏”
-
-
-
-# 项目初初始化
-
-spring boot
-
-mysql
-
-mybaits
-
-web
-
-Knife4j
-
-
-
-# 接入 AI
-
-记录一下选择的模型
-
-![image-20250317100552806](images/开发手册.assets/image-20250317100552806.png)
-
-官方demo 引入测试
-
-
-
-1. 引入依赖
-
-```xml
-       <!--        AI 接入 火山引擎 Deepseek https://www.volcengine.com/experience/ark-->
-        <dependency>
-            <groupId>com.volcengine</groupId>
-            <artifactId>volcengine-java-sdk-ark-runtime</artifactId>
-            <version>0.1.153</version>
-        </dependency>
-```
-
-2. 创建apikey 并且使用官方demo 测试是否引入成功
-
-```java
 package com.ls.ai;
 
 import com.volcengine.ark.runtime.model.completion.chat.ChatCompletionRequest;
@@ -90,7 +12,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 public class AiTest {
     // 从环境变量中获取您的 API Key。此为默认方式，您可根据需要进行修改
-       static String apiKey = "你的apikey";
+    static String apiKey = "你的apikey";
     // 此为默认路径，您可根据业务所在地域进行配置
     static String baseUrl = "https://ark.cn-beijing.volces.com/api/v3";
     static ConnectionPool connectionPool = new ConnectionPool(5, 1, TimeUnit.SECONDS);
@@ -140,12 +62,3 @@ public class AiTest {
     }
 
 }
-
-```
-
-测试： 如下引入成功
-
-![image-20250317101158613](images/开发手册.assets/image-20250317101158613.png)
-
-
-
