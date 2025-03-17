@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: haiguitang
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/
+    username: root
+    password: root
+server:
+  port: 8113
+  servlet:
+    context-path: /api
+
+
+# 接口文档配置
+knife4j:
+  enable: true
+  openapi:
+    title: "接口文档"
+    version: 1.0
+    group:
+      default:
+        api-rule: package
+        api-rule-resources:
+          - com.ls.ai.controller
+
+
+# ai
+ai:
+  apiKey: xxxxx
+
+
+
