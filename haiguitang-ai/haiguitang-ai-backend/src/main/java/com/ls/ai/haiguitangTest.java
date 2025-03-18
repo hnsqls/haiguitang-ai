@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.Scanner;
 
-@Component
+//@Component
 public class haiguitangTest implements CommandLineRunner {
 
     @Resource
