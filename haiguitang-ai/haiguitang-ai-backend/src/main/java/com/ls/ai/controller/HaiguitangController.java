@@ -1,5 +1,7 @@
 package com.ls.ai.controller;
 
+import com.ls.ai.common.BaseResponse;
+import com.ls.ai.common.ResultUtils;
 import com.ls.ai.service.haiguitangSevice;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +18,8 @@ public class HaiguitangController {
      * 生成海龟汤故事
      */
     @GetMapping("/generate")
-    public String generateStory() {
-        return haiguitangService.generateStory();
+    public BaseResponse<String> generateStory() {
+        return ResultUtils.success(haiguitangService.generateStory());
     }
 
     /**
@@ -28,7 +30,8 @@ public class HaiguitangController {
      * @return AI 回复
      */
     @PostMapping("/interact")
-    public String handleUserInput(@RequestParam String sessionId, @RequestParam String userInput) {
-        return haiguitangService.handleUserInput(sessionId, userInput);
+    public BaseResponse<String> handleUserInput(@RequestParam String sessionId, @RequestParam String userInput) {
+
+        return  ResultUtils.success(haiguitangService.handleUserInput(sessionId, userInput));
     }
 }
