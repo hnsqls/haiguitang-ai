@@ -25,6 +25,11 @@ knife4j:
           - com.ls.ai.controller
 
 
+# 日志
+logging:
+  file:
+    name: app.logs
+    path: logs
 # ai
 ai:
   apiKey: xxxxx

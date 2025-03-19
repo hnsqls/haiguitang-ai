@@ -6,6 +6,8 @@ target/
 # 本地配置文件
 application-local.yaml
 
+# 日志
+app.logs
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

@@ -134,7 +134,6 @@ const sendMessage = async () => {
     isLoading.value = false;
   }
 };
-
 // ... existing code ...
 // 消息列表更新后滚动到底部
 onUpdated(() => {
