@@ -86,48 +86,54 @@ const handleMenuClick = (item: { title: string, action: string }) => {
 };
 
 // 发送消息
+// ... existing code ... <script setup lang="ts">
+
+// ... existing code ... <const sendMessage = async () => {>
+
+// 发送消息
 const sendMessage = async () => {
   if (!userInput.value.trim() || isLoading.value) return;
-
+  
   try {
     isLoading.value = true;
-
+    
     // 检查是否有当前会话
     if (!gameStore.state.currentSession) {
       console.error('没有活动的游戏会话');
       return;
     }
-
+    
     // 获取sessionId
     const { sessionId } = gameStore.state.currentSession;
-
-    // 添加用户消息
-    gameStore.addMessage({ content: userInput.value, type: 'user' });
-
-    // 清空输入框
+    
+    // 保存用户输入并立即清空输入框
     const userQuestion = userInput.value;
-    userInput.value = '';
-
+    userInput.value = ''; // 在添加用户消息前清空输入框
+    
+    // 添加用户消息
+    gameStore.addMessage({ content: userQuestion, type: 'user' });
+    
     // 调用API处理用户输入
     const aiResponse = await handleUserInput(sessionId, userQuestion);
-
+    
     // 添加AI回复
-    gameStore.addMessage({
-      content: aiResponse,
-      type: 'ai'
+    gameStore.addMessage({ 
+      content: aiResponse, 
+      type: 'ai' 
     });
   } catch (error) {
     console.error('处理消息失败:', error);
     // 显示错误信息
-    gameStore.addMessage({
-      content: '抱歉，处理您的问题时出现了错误，请稍后再试。',
-      type: 'ai'
+    gameStore.addMessage({ 
+      content: '抱歉，处理您的问题时出现了错误，请稍后再试。', 
+      type: 'ai' 
     });
   } finally {
     isLoading.value = false;
   }
 };
 
+// ... existing code ...
 // 消息列表更新后滚动到底部
 onUpdated(() => {
   nextTick(() => {
