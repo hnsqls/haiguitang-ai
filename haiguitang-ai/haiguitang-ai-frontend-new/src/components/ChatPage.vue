@@ -90,7 +90,6 @@ const handleMenuClick = (item: { title: string, action: string }) => {
 
 // ... existing code ... <const sendMessage = async () => {>
 
-// 发送消息
 const sendMessage = async () => {
   if (!userInput.value.trim() || isLoading.value) return;
   
@@ -106,9 +105,12 @@ const sendMessage = async () => {
     // 获取sessionId
     const { sessionId } = gameStore.state.currentSession;
     
-    // 保存用户输入并立即清空输入框
+    // 保存用户输入
     const userQuestion = userInput.value;
-    userInput.value = ''; // 在添加用户消息前清空输入框
+    
+    // 先清空输入框
+    userInput.value = '';
+    await nextTick(); // 确保 DOM 更新
     
     // 添加用户消息
     gameStore.addMessage({ content: userQuestion, type: 'user' });
